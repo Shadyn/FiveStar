@@ -1,0 +1,127 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>5 Star Security - @Model.Content.Name</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="~/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/FiveStar.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <header style="padding:1em 0;" class="hidden-sm-down">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-sm-2">
+                        <a href="/"><img src="/images/fivestarlogo.jpg" alt="5 Star Security Systems" class="logo" /></a>
+                    </div>
+                    <div class="col-8 col-sm-10 my-auto">
+                        <h1>5 Star Security Systems<span class="hidden-lg-down"> - Serious About Security</span></h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded" data-toggle="sticky-onscroll">
+            <div class="container">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="/images/fivestarlogo.jpg" alt="5 Star Security Systems" class="hidden-md-up logo"/></a>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Members</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                    </ul>
+                    <a class="btn btn-success" href="tel:8125555555"><i class="fa fa-phone"></i> 812-555-5555 </a>
+                </div>
+            </div>
+        </nav>
+        @RenderBody()
+        <footer style="padding:1em 0; background-color:#002856; border-top:2px inset #000;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-4 text-capitalize text-center">
+                        <i class="fa fa-phone" style="display:inline-block; width:1.2em; text-align:center"></i><a href="tel:812-555-5555">812-555-5555</a><br />
+                        <i class="fa fa-envelope-o" style="display:inline-block; width:1.2em;"></i><a href="mailto:me@me.com">test@test.com</a><br />
+                        <a href="#"><i class="fa fa-facebook-square"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+                    </div>
+                    <div class="col-12 col-sm-4 text-center">
+                        <a href="/"><img src="/images/fivestarlogo.jpg" alt="5 Star Security Systems" style="width:3em;" /></a>
+                    </div>
+                    <div class="col-12 col-sm-4 text-center" >
+                        123456 Main St.<br />
+                        Newburgh, IN 47630
+                    </div>
+                </div>
+                <div class="row" style="margin:2em 0 2em 0">
+                    <div class="col-12 text-center">
+                        &copy; @DateTime.Now.Year 5 Star Security Systems
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- jQuery first, then Tether, then Bootstrap JS. -->
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="/scripts/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Custom 
+                var stickyToggle = function (sticky, stickyWrapper, scrollElement) {
+                    var stickyHeight = sticky.outerHeight();
+                    var stickyTop = stickyWrapper.offset().top;
+                    if (scrollElement.scrollTop() >= stickyTop) {
+                        stickyWrapper.height(stickyHeight);
+                        sticky.addClass("is-sticky");
+                    }
+                    else {
+                        sticky.removeClass("is-sticky");
+                        stickyWrapper.height('auto');
+                    }
+                };
+
+                // Find all data-toggle="sticky-onscroll" elements
+                $('[data-toggle="sticky-onscroll"]').each(function () {
+                    var sticky = $(this);
+                    var stickyWrapper = $('<div>').addClass('sticky-wrapper'); // insert hidden element to maintain actual top offset on page
+                    sticky.before(stickyWrapper);
+                    sticky.addClass('sticky');
+
+                    // Scroll & resize events
+                    $(window).on('scroll.sticky-onscroll resize.sticky-onscroll', function () {
+                        stickyToggle(sticky, stickyWrapper, $(this));
+                    });
+
+                    // On page load
+                    stickyToggle(sticky, stickyWrapper, $(window));
+                });
+            });
+        </script>
+    </body>
+</html>

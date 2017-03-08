@@ -1,0 +1,50 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Homepage>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+    Layout = "Master.cshtml";
+    var slides = Umbraco.TypedContentAtXPath("//slide");
+}
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+        @foreach (var slide in slides)
+        {
+            <div class="carousel-item @slide.IsFirst("active","")">
+                <img class="d-block img-fluid" src="@Url.GetCropUrl(slide, "image", "Slider")" alt="First slide" />
+                <div class="carousel-caption d-none d-md-block">
+                    <p>@slide.GetPropertyValue("caption")</p>
+                    <a class="btn btn-primary">@slide.GetPropertyValue("buttonText")</a>
+                </div>
+            </div>
+        }
+        
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="container home-cards">
+    <div class="row">
+        <div class="col-12 col-md-4 text-center">
+            <i class="fa fa-cogs rounded-circle"></i>
+            <h4>Home Automation</h4>
+            <p>Helping you automate your home and simplify your life.</p>
+        </div>
+        <div class="col-12 col-md-4 text-center">
+            <i class="fa fa-eye rounded-circle"></i>
+            <h4>Surveillance</h4>
+            <p>Keep an eye on your home - even when you are away</p>
+        </div>
+        <div class="col-12 col-md-4 text-center">
+            <i class="fa fa-lock rounded-circle"></i>
+            <h4>Security</h4>
+            <p>Protect your family and your investments</p>
+        </div>
+    </div>
+</div>
+
